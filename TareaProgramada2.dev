@@ -1,7 +1,7 @@
 [Project]
 FileName=TareaProgramada2.dev
 Name=TareaProgramada2
-UnitCount=3
+UnitCount=5
 PchHead=-1
 PchSource=-1
 Ver=3
@@ -11,9 +11,9 @@ ProfileIndex=0
 Folders=
 
 [Unit3]
-FileName=GeneticAlgorithm.cpp
+FileName=src\GeneticAlgorithmCases.cpp
 CompileCpp=1
-Folder=
+Folder=TareaProgramada2
 Compile=1
 Link=1
 Priority=1000
@@ -21,9 +21,9 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit1]
-FileName=main.cpp
+FileName=src\GeneticAlgorithm.cpp
 CompileCpp=1
-Folder=
+Folder=TareaProgramada2
 Compile=1
 Link=1
 Priority=1000
@@ -31,7 +31,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit2]
-FileName=GeneticAlgorithm.h
+FileName=src\GeneticAlgorithm.h
 CompileCpp=1
 Folder=TareaProgramada2
 Compile=1
@@ -114,4 +114,24 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=9
 CompilerType=9
+
+[Unit4]
+FileName=src\GeneticAlgorithmVisualizer.cpp
+CompileCpp=1
+Folder=TareaProgramada2
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit5]
+FileName=src\main.cpp
+CompileCpp=1
+Folder=TareaProgramada2
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
 
