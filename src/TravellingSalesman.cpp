@@ -1,11 +1,11 @@
 #include "GeneticAlgorithm.h"
 #include "TravellingSalesman.h"
 
-TravellingSalesman::TravellingSalesman (int populationSize,float elitismRatio,float mutationRatio,float sporadicRatio)
+TravellingSalesman::TravellingSalesman (int populationSize, float elitismRatio, float mutationRatio, float sporadicRatio)
+: GeneticAlgorithm (populationSize, elitismRatio, mutationRatio, sporadicRatio)
 {
     
 }
-
 
 void TravellingSalesman::reset ()
 {
