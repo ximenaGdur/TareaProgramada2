@@ -256,7 +256,7 @@ void* ProcessingThread::Entry(){
 				}
 				tmpBestResult = newResult;
 			}
-		}while(tmpEpoch<targetEpoch);
+		} while(tmpEpoch<targetEpoch);
 		if(tmpEpoch != lastUpdate){
 			*epoch = ga->getEpoch();
 			ga->drawBestIndividual(points,*numPoints);

@@ -1,7 +1,7 @@
 [Project]
 FileName=TareaProgramada2.dev
 Name=TareaProgramada2
-UnitCount=7
+UnitCount=6
 PchHead=-1
 PchSource=-1
 Ver=3
@@ -40,38 +40,8 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit4]
-FileName=src\GeneticAlgorithmVisualizer.cpp
-CompileCpp=1
-Folder=TareaProgramada2
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit5]
-FileName=src\main.cpp
-CompileCpp=1
-Folder=TareaProgramada2
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
 [Unit6]
-FileName=src\TravellingSalesman.cpp
-CompileCpp=1
-Folder=TareaProgramada2
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit7]
-FileName=src\TravellingSalesman.h
+FileName=src\main.cpp
 CompileCpp=1
 Folder=TareaProgramada2
 Compile=1
@@ -98,6 +68,7 @@ ProductName=
 ProductVersion=
 AutoIncBuildNrOnRebuild=0
 AutoIncBuildNrOnCompile=0
+UnitCount=6
 
 [Profile1]
 ProfileName=MingW gcc
@@ -154,4 +125,24 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=9
 CompilerType=9
+
+[Unit5]
+FileName=src\TravellingSalesman.h
+CompileCpp=1
+Folder=TareaProgramada2
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit4]
+FileName=src\TravellingSalesman.cpp
+CompileCpp=1
+Folder=TareaProgramada2
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
 

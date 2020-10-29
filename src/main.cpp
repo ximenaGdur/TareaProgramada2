@@ -1,7 +1,8 @@
 #include <cstdlib>
 #include <iostream>
 
-#include "GeneticAlgorithmVisualizer.cpp"
+//#include "GeneticAlgorithmVisualizer.cpp"
+#include "TravellingSalesman.h"
 #include "GeneticAlgorithmCases.h"
 
 int main()
