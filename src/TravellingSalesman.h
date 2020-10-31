@@ -12,25 +12,34 @@ class Case
 {
  private: //@author Jan Pablo Murillo - B95447
     /// Atributes
-    // array size 'cities'
+    int* genome;
+    float fitness;
+    int amountCities;
  public:
     /// Constructors
-    Case(); //@author Jan Pablo Murillo - B95447 ^ int cities -> 'size'
+    Case(int amountCities=0); //@author Jan Pablo Murillo - B95447
     ~Case(); //@author Jan Pablo Murillo - B95447
     /// Methods
+    void setGenome(); //@author Jan Pablo Murillo - B95447
     float getFitness(); //@author Jimena Gdur - B93250
     int* getGenome(); //@author Jan Pablo Murillo - B95447
+ private:
+    inline float calculateFitness() //@author Jimena Gdur - B93250
+    {
+        float fitness=0;
+        return fitness;
+    }
 };
 
 /************************** TravellingSalesman Class **************************/
 
 class TravellingSalesman : public GeneticAlgorithm
 {
- protected: //@author Jimena Gdur - B93250
-    Case* population; 
-    const Case* original;
-    int amountCities;
-    float** cities;
+ protected: 
+    Case* population; //@author Jimena Gdur - B93250
+    const Case* original; //@author Jimena Gdur - B93250
+    int amountCities; //@author Jan Pablo Murillo - B95447
+    float** cities; //@author Jimena Gdur - B93250
  public:       
     TravellingSalesman (float** cities, int populationSize, float elitismRatio, float mutationRatio, float sporadicRatio); //@author Jimena Gdur - B93250
     ~TravellingSalesman (); //@author Jimena Gdur - B93250

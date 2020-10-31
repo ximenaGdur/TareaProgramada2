@@ -2,32 +2,56 @@
 
 /********************************* Case Class *********************************/
 
-Case::Case() 
+Case::Case (int amountCities) 
+: amountCities (amountCities)
+, genome (new int[amountCities]) 
+, fitness (calculateFitness())
 {
-    
+    setGenome();
 }
 
-Case::~Case() 
-{
-    
+Case::~Case(){
+    delete  genome;
 }
+
 
 float Case::getFitness()
 {
-    
+    return fitness;
 }
+
+void Case::setGenome(){
+    int e, g;
+    srand(time(NULL));
+    for(int i=0; i<amountCities; i++){
+        g=i;
+        e= generateRandomNumber(0, amountCities);
+        for(int d=0;d<=g;d++){
+            if(e==genome[d]){
+                g=g-g;
+                i=i-1;;
+            }
+            while((g==i)&&(e!=genome[d])&&(d==i)){
+                genome[i]=e;
+            }
+        }
+    }
+    genome[amountCities+1]=genome[0];
+}
+
 
 int* Case::getGenome()
 {
-    
+    return genome;
 }
 
 /************************** TravellingSalesman Class **************************/
 
 TravellingSalesman::TravellingSalesman (float** cities, int populationSize, float elitismRatio, float mutationRatio, float sporadicRatio)
 : GeneticAlgorithm (populationSize, elitismRatio, mutationRatio, sporadicRatio)
-, original (new Case [populationSize])
+, original (new Case(populationSize) [populationSize])
 , population (new Case [populationSize]) 
+, amountCities ( sizeof(cities) / sizeof(cities[0]) )
 , cities (cities) { 
     sort(); 
     for (int i=0; i<populationSize; i++)

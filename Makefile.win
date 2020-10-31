@@ -1,7 +1,7 @@
 # Project: TareaProgramada2
 # Compiler: Default GCC compiler
 # Compiler Type: MingW 3
-# Makefile created by wxDev-C++ IDE 7.4.2.569 on 28/10/20 21:13
+# Makefile created by wxDev-C++ IDE 7.4.2.569 on 30/10/20 15:55
 
 WXLIBNAME = wxmsw29u
 CPP       = g++.exe
