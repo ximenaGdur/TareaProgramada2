@@ -5,87 +5,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define RENDER_EPOCH_EVERY 50
+#include "GeneticAlgorithmVisualizer.h"
 
-#include "GeneticAlgorithm.h"
 /* -------- ADD YOUR INCLUDE HERE -------- */
 #include "TravellingSalesman.h"
 /* -------- ADD YOUR INCLUDE HERE -------- */
 
-
-// Object identifiers
-enum{
-	ID_MAINPANEL = 1,
-	ID_EPOINPUT = 11,
-	ID_POPINPUT = 12,
-	ID_HOFINPUT = 13,
-	ID_MUTINPUT = 14,
-	ID_NEWINPUT = 15,
-	ID_EPOTEXT = 21,
-	ID_POPTEXT = 22,
-	ID_HOFTEXT = 23,
-	ID_MUTTEXT = 24,
-	ID_NEWTEXT = 25,
-	ID_RESETBUTTON = 31,
-	ID_GOTOBUTTON = 32,
-	ID_NEXTBUTTON = 33,
-	ID_UPDATECANVAS = 101,
-};
-
-// Class declarations
-class DrawApp : public wxApp{
-	public:
-    	virtual bool OnInit();
-};
-
-class Canvas2D : public wxGLCanvas {
-	public:
-    	Canvas2D(wxFrame* parent, wxSize size);
-    	~Canvas2D();
-    	void Redraw();
-    private:
-		wxGLContext *context;
-};
-
-class MainWindow : public wxFrame{
-	public:
-    	MainWindow();
-    	~MainWindow();
-	private:
-    	void OnExit(wxCommandEvent& event);
-	    void OnAbout(wxCommandEvent& event);
-	    void OnSize(wxSizeEvent& event);
-	    void OnMaximize(wxMaximizeEvent& event);
-	    void ResetGA(wxCommandEvent& event);
-	    void GotoGA(wxCommandEvent& event);
-	    void NextGA(wxCommandEvent& event);
-	    void UpdateEvent(wxThreadEvent& event);
-	    void UpdateState();
-	    float Clamp(float value, float min, float max);
-	    char statusBarReport[256];
-		wxMenu* menu;
-		wxMenuBar* menuBar;
-		wxPanel *mainPanel;
-		wxTextCtrl *epoInput,*popInput,*hofInput,*mutInput,*newInput;
-		wxStaticText *epoText,*popText,*hofText,*mutText,*newText;
-		wxButton *resetButton,*gotoButton,*nextButton;
-		Canvas2D* canvas;
-		GeneticAlgorithm* ga;
-		float** points;
-		float bestResult;
-		unsigned int numPoints,epoch,lastUpdate;
-		friend class Canvas2D;
-};
-
-class ProcessingThread : public wxThread{
-	public:
-		ProcessingThread(MainWindow *frame,GeneticAlgorithm* ga,float** points,float* bestResult,unsigned int *numPoints,unsigned int *epoch,unsigned int targetEpoch);
-		virtual void* Entry();
-	private:
-		MainWindow *frame;
-		GeneticAlgorithm* ga;
-		float **points,*bestResult;
-		unsigned int *numPoints,*epoch, targetEpoch;
-};
+// wxWidgets version 2.9
+BEGIN_EVENT_TABLE(MainWindow,wxFrame)
+	EVT_MENU(wxID_ABOUT,MainWindow::OnAbout)
+	EVT_MENU(wxID_EXIT,MainWindow::OnExit)
+	EVT_BUTTON(ID_RESETBUTTON,MainWindow::ResetGA)
+	EVT_BUTTON(ID_GOTOBUTTON,MainWindow::GotoGA)
+	EVT_BUTTON(ID_NEXTBUTTON,MainWindow::NextGA)
+END_EVENT_TABLE()
 
 // "main function" macro
 wxIMPLEMENT_APP(DrawApp);
@@ -117,8 +50,9 @@ MainWindow::MainWindow() : wxFrame(0, wxID_ANY, "Genetic Algorithm Visualizer"){
 	menuBar->Append(menu, "&Menu");
 	SetMenuBar(menuBar);
 	CreateStatusBar();
-//	Bind(wxEVT_MENU, &MainWindow::OnExit, this, wxID_EXIT);
-//	Bind(wxEVT_MENU, &MainWindow::OnAbout, this, wxID_ABOUT);
+	// wxWidgets version 3.1: doesn't uses event table
+	//Bind(wxEVT_MENU, &MainWindow::OnExit, this, wxID_EXIT);
+	//Bind(wxEVT_MENU, &MainWindow::OnAbout, this, wxID_ABOUT);
 	Bind(wxEVT_SIZE, &MainWindow::OnSize, this);
 	Bind(wxEVT_THREAD, &MainWindow::UpdateEvent, this, wxID_ANY);
 	mainPanel = new wxPanel(this, ID_MAINPANEL, wxPoint(25, 25), wxSize(530, 400));
@@ -137,9 +71,10 @@ MainWindow::MainWindow() : wxFrame(0, wxID_ANY, "Genetic Algorithm Visualizer"){
 	gotoButton = new wxButton(this, ID_GOTOBUTTON, "Go to", wxPoint(420, 475), wxSize(60,20));
 	nextButton = new wxButton(this, ID_NEXTBUTTON, "Next", wxPoint(500, 475), wxSize(60,20));
 	epoInput->SetEditable(false);
-//	resetButton->Bind(wxEVT_BUTTON, MainWindow::ResetGA, this);
-//	gotoButton->Bind(wxEVT_BUTTON, MainWindow::GotoGA, this);
-//	nextButton->Bind(wxEVT_BUTTON, MainWindow::NextGA, this);
+	// wxWidgets version 3.1: doesn't uses event table
+	//resetButton->Bind(wxEVT_BUTTON, MainWindow::ResetGA, this);
+	//gotoButton->Bind(wxEVT_BUTTON, MainWindow::GotoGA, this);
+	//nextButton->Bind(wxEVT_BUTTON, MainWindow::NextGA, this);
 	SetMinSize(wxSize(600,600));
 	SetSize(0,0,600,600);
 	Center();
@@ -256,7 +191,7 @@ void* ProcessingThread::Entry(){
 				}
 				tmpBestResult = newResult;
 			}
-		} while(tmpEpoch<targetEpoch);
+		}while(tmpEpoch<targetEpoch);
 		if(tmpEpoch != lastUpdate){
 			*epoch = ga->getEpoch();
 			ga->drawBestIndividual(points,*numPoints);
